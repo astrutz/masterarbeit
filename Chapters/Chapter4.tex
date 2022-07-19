@@ -1,0 +1,39 @@
+%!TEX root = ../main.tex
+% Chapter 4
+
+\chapter{Grundlagen}
+\label{Grundlagen}
+
+In diesem Kapitel werden die notwendigen Inhalte, theoretischen Konstrukte und Konzepte erklärt, auf welchen diese Arbeit basiert. Zudem wird ein Großteil der Begriffe erläutert, die sich im Glossar und Abkürzungsverzeichnis finden. Während sich Kapitel \ref{Kontext_und_Domaene} auf die sozialen und gesellschaftlichen Merkmale von E-Mails bezog, werden diese im Folgenden hinsichtlich ihrer technischen Merkmale betrachtet. Da die Zielhierarchie die Gewichtung von E-Mails mit einem endlichen Gegenwert vorgibt, beschäftigt sich der zweite Teil dieses Kapitels mit dem Mechaniken von \emph{Pay to win}, welche ein ähnliches Ziel im Kontext von Videospielen verfolgen.
+
+%----------------------------------------------------------------------------------------
+
+\section{Standards und Technologien zum E-Mail Versand}
+
+E-Mail ist ein asynchrones Kommunikationsmittel im Internet, welches ermöglicht Nachrichten, ähnlich eines Briefes, zu versenden \citep[S. 142]{Kurose2014}. Diese Nachrichten sind, in der Ursprungsversion der Technologie, rein text-basiert und können aus beliebigen 7-Bit-\acrshort{ascii} Zeichen bestehen \citep[S. 9]{RFC5322}. E-Mail lässt sich in der Anwendungsschicht des \acrshort{osi}-Referenzmodells verorten, die zugehörigen Protokolle \acrshort{smtp}, \acrshort{pop3} und \acrshort{imap} verpacken \acrshort{tcp}/\acrshort{ip} dabei und werden im Folgenden erläutert.
+
+Als erste Form der E-Mail kann der Befehl \textit{MAIL} betrachtet werden, welcher 1965 von Noel Morris und Tom van Vleck dem \acrfull{ctss} am \acrshort{mit} hinzugefügt wurde. Das \acrshort{ctss} kann als ein Rechner verstanden werden, welche verschiedene Benutzerbereiche innerhalb einer Maschine trennt. Nutzer konnten mit dem MAIL-Befehl in einem Terminal Texte an andere Nutzer versenden. Die Texte erschienen im Dateisystem in einer nur dem Empfänger zugänglichen Datei, genannt Mailbox \citep[S. 4]{Vleck2012}. Diese Nachrichten konnten jedoch nur innerhalb des \acrshort{ctss} versendet werden, da der Rechner zu diesem Zeitpunkt noch keine Verbindung an ein externes Netz besaß. 1971 wurde dieses Konzept von Ray Tomlinson aufgegriffen, um Nachrichten über ARPANet, dem Vorläufer des Internets, versenden zu können \citep[S. 4 ff.]{Partridge2008}. Zu diesem Zeitpunkt war das Versenden von Nachrichten betriebssystemabhängig und nicht vereinheitlicht. In RFC 385 wird die E-Mail erstmals als zusätzliche Funktion von \acrshort{ftp} aufgegriffen und diskutiert \citep[S. 3 f.]{RFC385}. 1982 werden in RFC 821 erstmals eine Systemarchitektur und \acrshort{smtp} erwähnt \citep[S. 2 ff.]{RFC821}. Aus diesem RFC heraus entwickelten sich die heute üblichen Standards, welche in ihrer aktuellsten Form in RFC 5321 festgehalten wurden \citep{RFC5321}.
+
+adressen kurz erklären
+
+\todo{Ursprüngliche Architekturdiagramm der Mail aus RFC 5321 nehmen}
+
+\begin{itemize}
+    \item X Generelle Definition
+    \item X Geschichte und Entstehung
+    \item E-Mail Adressen
+    \item User Agent / MUA und MTA
+    \item Technische Zustellung einer E-Mail (Client/Server Architktur von Mails)
+    \item port
+    \item was passiert wenn nicht zustellbar, warteschlangen (tanenbaum 144)
+    \item IMAP/SMTP/POP3
+    \item Aufbau einer E-Mail + HTML (Header/Body)
+    \item features wie lesebestätigung, autoantwort etc
+    \item sicherheit und s/mime (schwenk)
+\end{itemize}
+
+%----------------------------------------------------------------------------------------
+
+\section{Bezahlsysteme zur Schaffung von Vorteilen in Videospielen (Pay to win)}
+
+tbd
