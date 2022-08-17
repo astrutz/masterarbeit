@@ -1,0 +1,64 @@
+%!TEX root = ../main.tex
+% Chapter 8
+
+\chapter{Technische Konzeption des Systems}
+\label{Technische_Konzeption_des_Systems}
+
+Dieses Kapitel beschäftigt sich mit der technischen Konzeption des Systems, wobei die Erkenntnisse der Markt- und Forschungsrecherche aus Kapitel \ref{Erkenntnisse_fuer_das_zu_entwickelnde_System} als Basis für die Architektur dienen. 
+
+\section{Auswahl der Programmsprache und Pattern}
+\label{Auswahl_der_Technologie_und_Designpattern}
+
+Im Folgenden sollen die zu verwendenden Sprachen und Software Pattern definiert und beschrieben werden. Hierbei wird versucht möglichst wenige Sprachen zu nutzen, um die Entwicklungszeit zu minimieren. Die Auswahl eines Patterns hängt von der Sprache ab. So definieren manche Sprachen ein Pattern vor (diese werden auch \emph{opinionated languages} genannt), während andere die Entscheidung beim Entwickler belassen.
+
+Die für die Entwicklung relevanten Funktionen können in drei Module unterteilt werden: Erweiterung des Absender-Clients, Empfänger-Client und Zahlungsmodul. Die Erweiterung des Absender-Clients beschreibt Plugins, die unterschiedliche E-Mail Clients erweitern. Da hierfür keine universelle Anwendung geschaffen werden kann, wird ein Web-Frontend implementiert, welches von verschiedenen Clients dargestellt werden kann. Innerhalb des Frontends wird das Headerfeld generiert, welches der Nutzer daraufhin in seinem Client hinterlegen kann. Der Empfänger-Client ist eine neu zu entwickelnde Anwendung, die sowohl ein Backend zur Speicherung der priorisierten E-Mails, als auch ein Frontend zur Darstellung jener benötigt. Das Zahlungsmodul ist ein Backend, welches die Zahlungen verwaltet und speichert. Es wird sowohl vom Absender-Frontend, als auch von der Anwendung des Empfängers kontaktiert. Darüber hinaus verwaltet es die Token, die jedem Nutzer zur Verfügung stehen.
+
+\subsection{Node.js}
+\label{Node.js}
+
+% Framework und die darunter liegende Sprache erwähnen
+% Features und Möglichkeiten der Sprache
+% Pros für unseren Anwendungsfall
+% Contras für unseren Anwendungsfall
+
+
+\subsection{Ruby on Rails}
+\label{Ruby_on_Rails}
+
+% Framework und die darunter liegende Sprache erwähnen
+% Features und Möglichkeiten der Sprache
+% Pros für unseren Anwendungsfall
+% Contras für unseren Anwendungsfall
+
+\subsection{Laravel}
+\label{ss}
+
+% Framework und die darunter liegende Sprache erwähnen
+% Features und Möglichkeiten der Sprache
+% Pros für unseren Anwendungsfall
+% Contras für unseren Anwendungsfall
+
+\subsection{Django}
+\label{ss}
+
+% Framework und die darunter liegende Sprache erwähnen
+% Features und Möglichkeiten der Sprache
+% Pros für unseren Anwendungsfall
+% Contras für unseren Anwendungsfall
+
+\subsection{Spring Boot}
+\label{ss}
+
+% Framework und die darunter liegende Sprache erwähnen
+% Features und Möglichkeiten der Sprache
+% Pros für unseren Anwendungsfall
+% Contras für unseren Anwendungsfall
+
+\section{Festlegung einer Systemarchitektur}
+\label{Festlegung_einer_Systemarchitektur}
+
+\subsection{Datenmodell}
+\label{Datenmodell}
+
+\subsection{Komponentendiagramm}
+\label{Komponentendiagramm}

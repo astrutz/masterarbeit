@@ -1,0 +1,61 @@
+%!TEX root = ../main.tex
+% Chapter 6
+
+\chapter{Recherche nach vergleichbaren Produkten und Forschungen}
+\label{Recherche_nach_vergleichbaren_Produkten_und_Forschungen}
+
+Das folgende Kapitel listet Produkte und Forschungsergebnisse auf, die die zuvor gestellten Anforderungen zumindest teilweise erfüllen. Aus dieser Recherche werden Features, Ansätze und Erkenntnisse abgeleitet, die als Basis für das zu entwickelnde System gelten.
+
+\section{E-Mail Headerfeld für Priorität}
+Ein erster Lösungsansatz wäre die Nutzung des E-Mails Headers zum Setzen der Priorität. Da dieses Feld bereits in diversen MUAs und bei Nutzern etabliert ist, müsste hierfür keine neue Technologie implementiert werden. Außerdem ist das Feld bereits im Standard integriert. Auch ist es mit IMAP möglich E-Mails zuerst zu erhalten, die als priorisiert gekennzeichnet sind.
+
+Der Ansatz bringt jedoch diverse Probleme mit sich. So wurde in Kapitel \ref{Kontext_und_Domaene} bereits erwähnt, dass das Feld von Empfängern in ihrer Triage häufig nicht berücksichtigt wird \citep[S. 279 f.]{Whittaker1996}. Darüber hinaus gibt es auch keine Konventionen, wann eine E-Mail eine höhere Priorität hat und wann nicht, da dies ein subjektives Empfinden ist. So müssten konsistente und verbindliche Standards definiert werden, nach welchen eine E-Mail priorisiert ist und damit schneller bearbeitet wird. Selbst mit diesen Standards könnten Absender eine E-Mail Warteschlange nicht gezielt steuern und haben keine Einsicht in die noch offenen E-Mails beim Empfänger.
+
+\section{E-Mails manuell mit Gegenwert versehen}
+Um eine gezieltere und verbindlichere Priorisierung zu ermöglichen, könnten E-Mails manuell mit einem Gegenwert versehen werden. So könnten Empfänger ihre Absender informieren, dass sie Zahlungen über gewisse Wege annehmen. Absender würden dann unabhängig vom Versand der E-Mail eine Zahlung hinterlegen und diese in der E-Mail selbst referenzieren. Der Empfänger müsste die Zahlungen mit seinem Postfach abgleichen, um eine Triage durchzuführen.
+
+Ein solches Vorgehen würde zu einem immensen Aufwand für den Empfänger führen, da dieser nicht nur sein Postfach, sondern auch sein/e Zahlungskonto/-en abgleichen muss, bevor die Triage durchgeführt werden kann. Außerdem muss im Zweifel jede E-Mail geöffnet werden, um die Referenz zur Zahlung zu finden. Diese händische Arbeit birgt ein großes Fehlerpotenzial. Zudem kann dieses Verfahren nicht universell angewendet werden, da verschiedene Empfänger unter Umständen verschiedene Zahlungswege bevorzugen, die zeitverzögert sein können. Beispielsweise könnte so eine E-Mail mit einem hohen Zahlungsbetrag erst nach mehreren Werktagen bearbeitet werden, wenn der Empfänger eine zugehörige Überweisung abwarten muss. Auch muss die Sicherheit betrachtet werden. Personen können sich als der Empfänger einer E-Mail ausgeben und ihre Zahlungswege an Personen weiterleiten, ohne dass diese mit dem eigentlichen Empfänger in Verbindung stehen. So wäre es möglich Zahlungen fälschlicherweise abzugreifen.
+
+\subsection{Onlineshops}
+Um den Zahlungsprozess zu automatisieren, könnten Empfänger auch eine Art Onlineshop einrichten. Hierbei kaufen sich Absender einen Platz in der Warteschlange des Empfängers und geben beim Kauf ihre Nachricht an. Hierdurch könnten menschliche Fehler und Kompromittierung eingegrenzt werden, allerdings würde ein solches Vorgehen individuell sein und sich vom E-Mail Standard distanzieren. Auch wäre die Aussagekraft eines gekauften Platzes recht gering, da z.B. 500 Personen gleichzeitig einen Platz kaufen könnten in der Erwartung, dass ihre E-Mail schnell bearbeitet wird, ohne zu wissen, dass das Aufkommen sehr hoch ist. Dieses Problem wäre mit einer begrenzten Verfügbarkeit an Plätzen zu lösen. Eine gezielte Absendersteuerung, sowie eine Einsicht in das Aufkommen des Empfängers würde hierbei jedoch nicht abgedeckt werden.
+
+\subsection{Payment-Based Email}
+\label{Payment-Based_Email}
+\cite{Turner2003} beschäftigen sich in \textit{Payment-Based Email} mit der Monetarisierung von E-Mails. Im Vordergrund steht die Abwehr von Spam mit der Versendung von Zahlungen innerhalb der E-Mail. Konkret solle SMTP um den Befehl \textit{PAYMENT} erweitert werden. Die Zahlungen sollen über das \acrfull{lcp}, einem Protokoll für leichtgewichtige organisationsspezifische Währungen, ablaufen. So kann ein Unternehmen eine interne Währung definieren und sie an ihre Mitglieder verteilen, sodass sie die Währung einer E-Mail hinzufügen, um die Authentizität sicherzustellen.
+
+Ein Vorteil ist die direkte Integration in den E-Mail Standard, wodurch keine Drittanbieter wie Onlineshops genutzt werden müssten. Dadurch könnte Payment-Based Email direkt in MUAs genutzt werden und auch eine Priorisierung wäre mit geringen Anpassungen möglich. Die Nutzung von LCP gibt die Möglichkeit Absender mit einer gewissen Menge der Währung auszustatten, sodass Zahlungen mit Echtgeld nicht notwendig sind.
+
+Das System sowie der PAYMENT-Befehl und LCP wurden zwar konzeptioniert, jedoch nie als RFC formuliert oder umgesetzt. Hinzu kommt, dass das Prinzip auf dem technologischen Stand von vor ca. 20 Jahren ist. Mittlerweile sind neue Zahlungsmechanismen wie Cryptowährungen im Umlauf, die LCP ersetzen können. Außerdem gibt es keinen Prozessschritt vor dem Setzen einer Zahlung, der es ermöglicht eine Einsicht in die Warteschlange zu erhalten. Ebenfalls wird die Bearbeitungsleistung des Empfängers nicht berücksichtigt, sodass Zahlungen keine verbindliche Bearbeitung erzeugen. \citep[S. 3 f.]{Turner2003}
+
+%----------------------------------------------------------------------------------------
+
+\section{Ticketsysteme und Helpdesks}
+Während sich die vorangegangenen Konzepte insbesondere mit der Priorisierung von E-Mails, sowie Zahlungsmöglichkeiten beschäftigten, werden nun Warteschlangen und transparente Kommunikation an Absender thematisiert. Zur Koordination von IT-Supportanfragen werden in größeren Unternehmen Produkte wie \textit{JIRA Service Management}, \textit{Zendesk}, \textit{HappyFox}, \textit{Ivanti} oder \textit{Freshdesk} verwendet. Diese Produkte ermöglichen es aus Anfragen Tickets zu erzeugen, die sich in einer Warteschlange befinden und von verschiedenen Personen bearbeitet werden können. Die Tickets können über eine eigene Oberfläche, Website oder auch telefonisch oder per Mail generiert werden \citep{jiramail}. Auch ist es Bearbeitern möglich die Kommunikation ausschließlich via E-Mail zu führen. Es können verschiedene Prozesse automatisiert werden, so ist es beispielsweise möglich beim Erhalt einer E-Mail dem Absender eine Rückmeldung zu geben an welcher Position der Warteschlange er sich befindet und wie hoch die durchschnittliche Wartezeit ist. Auch können Personen priorisiert werden, deren Anfragen prinzipiell zuerst bearbeitet werden.
+
+Während Ticketsysteme und Helpdesks somit eine hohe Transparenz hinsichtlich der Bearbeitungszeit und dem Aufkommen haben, ist eine Triage und Priorisierung nur schwer möglich. Die Priorisierung muss in einer manuellen Triage durchgeführt werden, alternativ dazu können Zahlungen, wie bereits erwähnt, unabhängig durchgeführt und verwaltet werden. Das Installieren und Betreiben eines eigenen Ticketsystems ist im Vergleich zum Aufsetzen eines E-Mail Kontos zeit- und kostenaufwändig, insbesondere bei technisch wenig versierten Anwendern.
+
+%----------------------------------------------------------------------------------------
+
+\section{Regeln zur automatischen Triage}
+Während Ticketsystemen die Möglichkeit zur automatischen Triage fehlt, könnte diese in E-Mail Clients zumindest teilweise konfiguriert werden. Nutzer haben die Möglichkeit Regeln festzulegen nach welchen E-Mails gelöscht, mit einer Priorität versehen oder in verschiedene Ordner verschoben werden. Die Regeln können anhand verschiedener Parameter wie Absender, Betreff, Nachrichteninhalt, Nachrichtenlänge etc. definiert werden.
+
+Zwar kann die Triage dadurch teil-automatisiert werden, jedoch ist der initiale Aufwand für solche Regeln sehr hoch, insbesondere wenn sie verlässlich und treffend funktionieren sollen. Außerdem müssen Regeln im Laufe der Zeit angepasst werden wenn sich wichtige Absender ändern oder ein bestimmtes Thema besonders relevant wird. Auch ist diese Form der Triage allein durch den Empfänger gesteuert und bietet weder Transparenz über das Aufkommen, noch eine Priorisierung durch Absender.
+
+\subsection{Intelligente Systeme zur Triage}
+
+Eine Erweiterung des Konzepts von Regeln stellen \cite{Koprinska2007} dar. In \textit{Learning to classify e-mail} wird das Ablegen von E-Mails in Ordnern, sowie die Filterung nach Spam mittels einer künstlichen Intelligenz durchgeführt, die das \textit{Random Forest}-Verfahren angewendet. Dieses Verfahren dient zur Klassifikation von Daten mittels Entscheidungsbäumen \citep[S. 5 f.]{Breiman2001}. Die Klassifikation erfolgt mit der Gewichtung verschiedener Faktoren des Datensatzes. Die Faktoren müssen jedoch vordefiniert werden, sodass das System trainiert werden kann. Somit können keine individuellen Faktoren definiert werden, was das System kaum nutzbar macht. Außerdem ist die Genauigkeit des Systems mit 81\% bis 96\% nicht ausreichend, um es als alleiniges Mittel zur Triage zu verwenden \citep[S. 2174]{Koprinska2007}. Da das System lediglich mit dem Sortieren in Ordnern und nicht mit einer wirklichen Priorisierung getestet wurde, ist es als Lösungsansatz zu vernachlässigen.
+
+%----------------------------------------------------------------------------------------
+
+\section{Erkenntnisse für das zu entwickelnde System}
+\label{Erkenntnisse_fuer_das_zu_entwickelnde_System}
+Die zuvor beschriebenen Produkte und Forschungsansätze bieten verschiedene Aspekte, die für das zu entwickelnde System aufgegriffen werden können. Grundsätzlich ist festzuhalten, dass kein Produkt/Ansatz die Anforderungen voll erfüllt oder die Forschungsfrage hinreichend beantwortet. Zwar wäre auch eine Kombination jener Produkte/Ansätze mittels verschiedener Schnittstellen möglich, allerdings wäre dies mit einem hohen Aufwand verbunden und hinsichtlich proprietärer Produkte oder einer späteren Weiterentwicklung nicht sinnvoll. Somit ist die Entwicklung eines neuen Systems erforderlich.
+
+Der in \textit{Payment-Based Email} genannte Ansatz der integrierten Zahlungen kann hierbei als Basis dienen. Statt der Implementation eines neuen SMTP-Befehls kann ein individueller E-Mail Header verwendet werden. Das hat den Vorteil, dass sich kein neuer technischer Standard als RFC etablieren muss, sondern bisherige Technologien verwendet werden können. Die Zahlung muss demzufolge aus der E-Mail extrahiert werden, dadurch wird die Interoperabilität des Systems gewährleistet. 
+
+Eine solche Extraktion ist über die Entwicklung einer eigenen Komponente zur Zahlungsabwicklung möglich, die das Ziel hat, ein Headerfeld mit Zahlungsinformationen zu erzeugen. Dieses Headerfeld kann von einem Empfängerclient ausgelesen und zur automatischen Triage verwendet werden. Konventionelle E-Mails ohne ein entsprechendes Feld können als niedriger priorisiert betrachtet und vom Client entsprechend angezeigt werden.
+
+Somit kann der Absender in seinem bisherigen Client weiterhin E-Mails versenden, wenn die Zahlung extern abgewickelt wird. Die einzige Erweiterung des Absenderclients ist das Setzen des neuen Headerfelds. Komplexer gestaltet sich der Client des Empfängers; da dieser die Triage übernimmt, muss er eigens implementiert werden und kann nicht als Erweiterung eines bestehenden Clients fungieren. Auch da zur Nutzung des Systems grundlegende Konfigurationen, wie Zahlungswege und die eigene Bearbeitungsleistung, notwendig sind, ist die Implementation eines eigenen Clients unabdingbar.
+
+Der Vorteil dieser Aufteilung ist, dass E-Mails weiter uneingeschränkt nutzbar sind und Absender nicht mit dem neuen System interagieren müssen, wenn sich nicht an einer Priorisierung interessiert sind. Die Einsicht in das Nachrichtenaufkommen des Empfängers kann im Zuge des Zahlungsmoduls geschehen. Beim Zahlungsmodul muss sichergestellt sein, dass Zahlungen sicher und un-kompromittierbar durchgeführt werden.
+

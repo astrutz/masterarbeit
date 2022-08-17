@@ -4,17 +4,131 @@
 \chapter{Definition von Nutzeranforderungen}
 \label{Definition_von_Nutzeranforderungen}
 
-tbd: Erklären, dass diese Nutzeranforderungen aus Stakeholderanalyse und operativen Zielen entstehen, siehe Einleitung von Kap 3
+Nachfolgend werden die in Kapitel \ref{Operative_Ziele} definierten operativen Ziele in Nutzeranforderungen überführt. Darüber hinaus werden aus den Interessen, Ansprüchen, Anteilen und Anrechten der Stakeholder aus Kapitel \ref{Stakeholderanalyse} weitere Anforderungen definiert. Die Anforderungen werden im User Story Format von \cite{Cohn2004} formuliert und beinhalten eine Beschreibung aus Nutzersicht, eine Erklärung des Zwecks, sowie eine darauf folgende Liste an Akzeptanzkriterien. Darüber hinaus wird die Priorität mit 1 (niedrig) bis 3 (hoch) angegeben. Die Anforderungen dienen als Basis für die technische und inhaltliche Konzeption, sowie die spätere Implementation des Systems.
+
 
 %----------------------------------------------------------------------------------------
 
 \section{Anforderungen von Absendern}
 
-tbd
+\textbf{Einsicht des Nachrichtenaufkommens beim Empfänger} \\
+Priorität: 1 \\
+Als Absender möchte ich die Anzahl der zu bearbeitenden E-Mails beim Empfänger einsehen können, um einzuschätzen wie lange ich auf eine potenzielle Antwort warten muss.
+\begin{itemize}
+    \item Die Anzahl der offenen Nachrichten ist dem Absender bekannt und kann eingesehen werden.
+    \item Persönliche Daten und Informationen werden dem Absender nicht übermittelt.
+    \item Die voraussichtliche Antwortzeit, abhängig von der Bearbeitungsleistung (s.u.) des Empfängers, wird angezeigt.
+\end{itemize}
 
+\noindent
+\\ \textbf{Priorisierbarkeit von E-Mails mit Gegenwert} \\
+Priorität: 1 \\
+Als Absender möchte ich eine E-Mail mit einem endlichen Gegenwert versehen können, um eine schnellere Bearbeitung gewährleistet zu bekommen.
+\begin{itemize}
+    \item E-Mails können optional mit einem Gegenwert versehen werden, der für Absender und Empfänger einsehbar ist.
+    \item Dem Gegenwert wird eine Bearbeitungszeit zugeordnet, die von Absender und Empfänger einsehbar ist.
+    \item Die Bearbeitungszeit ist verbindlich und muss berücksichtigt werden.
+\end{itemize}
+
+\noindent 
+\textbf{Technologisch unabhängige Nutzung} \\
+Priorität: 2 \\
+Als Absender möchte ich meinen bevorzugten E-Mail Client verwenden können, um technologisch flexibel zu sein.
+\begin{itemize}
+    \item Die Einsicht in das Nachrichtenaufkommen und die Priorisierung von E-Mails sind clientunabhängig und können von jeglichem Endgerät aus genutzt werden.
+    \item Die Priorisierung wird unmittelbar im E-Mail Standard umgesetzt.
+    \item Die zusätzlich nötige Implementation kann von jedem Client ohne weitere Schritte eingebunden werden.
+\end{itemize}
+
+\noindent 
+\\ \textbf{Sicherheit der E-Mails und Zahlungen} \\
+Priorität: 2 \\
+Als Absender möchte ich meine E-Mails, sowie Zahlungsinformationen sicher übertragen um Missbrauch zu verhindern.
+\begin{itemize}
+    \item Der Inhalt von E-Mails, sowie Informationen über das Nachrichtenaufkommen werden verschlüsselt übertragen und sind von außen nicht einsehbar.
+    \item Zahlungsvorgänge und -informationen werden verschlüsselt übertragen und sind von außen nicht einsehbar.
+\end{itemize}
+
+\noindent 
+\\ \textbf{Keine Verlangsamung des E-Mail Prozesses} \\
+Priorität: 3 \\
+Als Absender möchte ich meine aktuelle Geschwindigkeit beim E-Mail Versand beibehalten, um meine Produktivität nicht einzuschränken.
+\begin{itemize}
+    \item Die Einsicht in das Nachrichtenaufkommen verlangsamt den Prozess des E-Mail Versands nicht signifikant.
+    \item Die Priorisierung von E-Mails verlangsamt den Prozess des E-Mail Versands nicht signifikant.
+\end{itemize}
 
 %----------------------------------------------------------------------------------------
 
 \section{Anforderungen von Empfängern}
+\label{Anforderungen_von_Empfaengern}
 
-tbd
+
+\textbf{Automatische Triage von E-Mails} \\
+Priorität: 1 \\
+Als Empfänger möchte ich priorisierte E-Mails angezeigt und vor-sortiert erhalten, um meine persönliche Triage zu verkürzen.
+\begin{itemize}
+    \item Priorisierte E-Mails werden nach ihrem Gegenwert sortiert angezeigt.
+    \item Priorisierten E-Mails wird ein Fälligkeitsdatum, abhängig von der eigenen Bearbeitungsleistung (s.u.), hinzugefügt, welches verbindlich ist.
+    \item E-Mails ohne Gegenwert werden nicht sortiert und erhalten kein Fälligkeitsdatum.
+\end{itemize}
+
+\noindent
+\\ \textbf{Definition der Bearbeitungsleistung} \\
+Priorität: 2 \\
+Als Empfänger möchte ich meine Bearbeitungsleistung hinterlegen können, um die Triage transparenter zu gestalten und Absender zu informieren.
+\begin{itemize}
+    \item Es kann eine Bearbeitungsleistung definiert werden, die die Anzahl der vom Empfänger zu bearbeitenden E-Mails pro Tag beschreibt.
+    \item Die Bearbeitungsleistung ist für den Empfänger verbindlich und muss eingehalten werden.
+    \item Eine Abweichung von der Bearbeitungsleistung und die damit entstehende Verzögerung wird dem Absender automatisch mitgeteilt.
+\end{itemize}
+
+\noindent
+\\ \textbf{Integrität der E-Mails und Zahlungen} \\
+Priorität: 2 \\
+Als Empfänger möchte ich bei priorisierten E-Mails sichergehen können, dass der  Gegenwert auch tatsächlich hinterlegt wurde.
+\begin{itemize}
+    \item Der Gegenwert einer E-Mail kann nicht anhand ihres Headers oder Bodys von außen ausgelesen werden.
+    \item Es ist nicht möglich Zahlungen zu fälschen oder den Gegenwert einer E-Mail zu verändern.
+    \item Zahlungen sind an einer nicht kompromittierbaren Stelle gespeichert und werden beim Empfang von E-Mails abgeglichen.
+\end{itemize}
+
+\noindent
+\\ \textbf{Abweichungen der automatischen Triage} \\
+Priorität: 3 \\
+Als Empfänger möchte ich E-Mails nachträglich sortieren und priorisieren können, um für mich relevante Nachrichten, die keinen Gegenwert erhalten haben, schneller bearbeiten zu können.
+\begin{itemize}
+    \item E-Mails können nach der Triage höher priorisiert werden, als sie es eigentlich sind.
+    \item Es können Regeln definiert werden (z.B. anhand bestimmter Absender oder gewisser Begriffe im Betreff), anhand welcher E-Mails nach der eigentlichen Triage höher priorisiert werden.
+    \item Von der Triage abweichende E-Mails erhalten kein Fälligkeitsdatum.
+    \item Von der Triage abweichende E-Mails, die bearbeitet werden, werden nicht zur täglichen Bearbeitungsleistung hinzugezählt.
+\end{itemize}
+
+\section{Übergreifende Nutzeranforderungen}
+
+\textbf{Erreichbarkeit} \\
+Priorität: 1 \\
+Als Nutzer möchte ich die Priorisierung und Einsicht jederzeit nutzen können, um sie verlässlich in meinen E-Mail Prozess zu integrieren.
+\begin{itemize}
+    \item Die Priorisierung und Einsicht sind jederzeit verfügbar.
+    \item Bei Nichterreichbarkeit sind Alternativen formuliert, die zumindest einen Teil der o.g. Anforderungen erfüllen.
+\end{itemize}
+
+\noindent
+\\ \textbf{Koexistenz zu bisherigen Kanälen} \\
+Priorität: 2 \\
+Als Nutzer möchte ich meine bisherigen Kommunikationskanäle weiter nutzen können, um unabhängig zu bleiben.
+\begin{itemize}
+    \item Kommunikationskanäle außerhalb der E-Mail bleiben unverändert.
+    \item E-Mails können weiter im herkömmlichen Sinne verwendet werden, die Priorisierung ist optional.
+\end{itemize}
+
+\noindent
+\\ \textbf{Intuitive Nutzung} \\
+Priorität: 2 \\
+Als Nutzer möchte eine der bisherigen E-Mail ähnlichen Oberfläche erhalten, um einen möglichst einfachen Übergang zu haben.
+\begin{itemize}
+    \item Die Benutzeroberfläche ähnelt bisherigen E-Mail Clients.
+    \item Die Benutzeroberfläche ist einfach verständlich und bietet einen schnellen Umstieg.
+    \item Es ist möglich seinen E-Mail Prozess ohne einen großen Aufwand umzustellen.
+\end{itemize}
