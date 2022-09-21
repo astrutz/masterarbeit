@@ -1,0 +1,67 @@
+<main class="capacities">
+
+  <div class="row mt-4">
+    <div class="col-12">
+      <h1>E-Mail Aufkommen von <%= @recipient %></h1>
+    </div>
+  </div>
+
+  <% if @mails > 50 %>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="alert alert-warning" role="alert">
+          Hinweis: <%= @recipient %> hat aktuell ein erhöhtes E-Mail Aufkommen, was zu einer Verzögerung in der
+          Bearbeitung führen kann.
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="row mt-4">
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="capacities__icon mb-3">
+            <i class="bi bi-inbox p-2"></i>
+          </div>
+          <p class="capacities__information"><%= @recipient %> hat aktuell <%= @mails %> unbearbeitete E-Mails
+            offen.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-4">
+      <div class="card">
+        <div class="card-body">
+          <div class="capacities__icon mb-3">
+            <i class="bi bi-bar-chart-steps p-2"></i>
+          </div>
+          <p class="capacities__information"><%= @recipient %> bearbeitet mindestens <%= @performance %> E-Mails pro
+            Tag.</p>
+        </div>
+      </div>
+    </div>
+<div class="col-sm-4">
+  <div class="card">
+    <div class="card-body">
+      <div class="capacities__icon mb-3">
+        <i class="bi bi-calendar-event p-2"></i>
+      </div>
+      <p class="capacities__information">Würden Sie jetzt eine E-Mail absenden, 
+        würde sie spätestens
+        am <%= l (@mails / @performance + 1).to_f.ceil.days.from_now.to_date %> 
+        beantwortet werden.</p>
+    </div>
+  </div>
+</div>
+</div>
+
+  <div class="row mt-5">
+    <div class="col-12" style="text-align: center">
+      <h2>Soll Ihre E-Mail schneller bearbeitet werden?</h2>
+      <p>Dann priorisieren Sie Ihre E-Mail mit Pay2Mail in wenigen Schritten.</p>
+      <%= link_to "E-Mail priorisieren", sender_priorities_path(recipient: @recipient), class: "btn btn-primary" %>
+    </div>
+  </div>
+
+
+</main>

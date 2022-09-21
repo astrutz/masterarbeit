@@ -43,9 +43,15 @@ headsepline, % Uncomment to get a line under the header
 
 \usepackage{mathpazo} % Use the Palatino font by default
 
+\usepackage{svg}
+
+\usepackage[chapter]{minted} % Style sourcecode easily
+
+\renewcommand\listingscaption{Sourcecode} % Show chapter number in listing caption
+
 \usepackage[backend=bibtex,style=authoryear,natbib=true, maxbibnames=99, dashed=false]{biblatex} % Use the bibtex backend with the authoryear citation style (which resembles APA)
 
-\addbibresource{example.bib} % The filename of the bibliography
+\addbibresource{literatur.bib} % The filename of the bibliography
 
 \usepackage[autostyle=true]{csquotes} % Required to generate language-dependent quotes in the bibliography
 
@@ -65,8 +71,11 @@ headsepline, % Uncomment to get a line under the header
 % Buchstaben statt Zahlen in Aufzählungen
 \usepackage{enumitem}
 
+% Diagramme
+\usepackage{pgfplots}
+
 % Codehighlighting
-\usepackage{listings}
+%\usepackage{listings}
 
 % package to break URL
 \usepackage{url}
@@ -149,6 +158,10 @@ headsepline, % Uncomment to get a line under the header
     
     \listoftables % Prints the list of tables
     \addcontentsline{toc}{chapter}{Tabellenverzeichnis} % Adds line into table of contents
+    
+    \renewcommand\listoflistingscaption{Sourcecodeverzeichnis}
+    \listoflistings
+    \addcontentsline{toc}{chapter}{Sourcecodeverzeichnis} % Adds line into table of contents
 }
 
 %----------------------------------------------------------------------------------------
@@ -157,12 +170,14 @@ headsepline, % Uncomment to get a line under the header
 
 \setglossarystyle{list}
 \printglossary[type=\acronymtype, title=Abkürzungsverzeichnis, toctitle=Abkürzungsverzeichnis, nonumberlist]
+\addcontentsline{toc}{chapter}{Abkürzungsverzeichnis} % Adds line into table of contents
 
 \glsaddallunused[\acronymtype]
 
 
 \setglossarystyle{altlist}
 \printglossary[nonumberlist]
+\addcontentsline{toc}{chapter}{Glossar} % Adds line into table of contents
 
 \glsaddallunused
 
@@ -185,6 +200,9 @@ headsepline, % Uncomment to get a line under the header
 \include{Chapters/Chapter6} 
 \include{Chapters/Chapter7}
 \include{Chapters/Chapter8}
+\include{Chapters/Chapter9}
+\include{Chapters/Chapter10}
+\include{Chapters/Chapter11}
 
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
@@ -196,8 +214,8 @@ headsepline, % Uncomment to get a line under the header
 % Uncomment the lines as you write the Appendices
 
 \include{Appendices/AppendixA}
-%\include{Appendices/AppendixB}
-%\include{Appendices/AppendixC}
+\include{Appendices/AppendixB}
+\include{Appendices/AppendixC}
 
 %----------------------------------------------------------------------------------------
 %	BIBLIOGRAPHY

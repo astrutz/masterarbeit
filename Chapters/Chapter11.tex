@@ -1,0 +1,41 @@
+\chapter{Implementation des Systems}
+\label{Implementation_des_Systems}
+Im Folgenden wird die Implementation des System erläutert, wobei zu Beginn Arbeitspakete definiert werden, die daraufhin bearbeitet werden. Die Dokumentation der Implementation wird wo notwendig mit Auszügen des Sourcecodes erweitert. Der vollständige Sourcecode ist unter \url{https://github.com/astrutz/masterthesis} zu finden, eine Pay2Mail Instanz zum Testen ist wie bereits erwähnt unter \url{https://pay2mail.org} zu finden.
+
+\section{Umwandlung der Anforderungen in Arbeitspakete}
+Um die in Kapitel \ref{Definition_von_Nutzeranforderungen} definierten Nutzeranforderungen zu strukturieren und die Entwicklung einzelner Features klar abzugrenzen, werden Arbeitspakete erstellt. Die Arbeitspakete werden so sortiert, dass die Anforderungen mit der höchsten Priorität zu Beginn implementiert werden. Das hat den Vorteil, dass bei fehlenden zeitlichen Ressourcen die wichtigsten Features bereits implementiert sind und Pay2Mail trotzdem nutzbar ist, wenn auch mit kleineren Einschränkungen. Tabelle \ref{tab:arbeitspakete} zeigt die Zuordnung der Anforderungen zu ihren jeweiligen Arbeitspaketen.
+
+\begin{table}[!h]
+\centering
+\caption[Arbeitspakete der Implementation]{Zuordnung der Anforderungen zu Arbeitspaketen}
+\begin{tabular}{|l|l|}
+\hline
+\textbf{Nutzeranforderung}               & \textbf{Arbeitspaket}            \\ \hline
+Einsicht in das Aufkommen des Empfängers & Einsicht in das E-Mail Aufkommen \\ \hline
+Priorisierbarkeit mit Gegenwert          & Priorisierung von E-Mails        \\ \hline
+Technologisch unabhängige Nutzung        & -                                \\ \hline
+Sicherheit der E-Mails und Zahlungen     & -                                \\ \hline
+Keine Verlangsamung des E-Mail Prozesses & -                                \\ \hline
+Automatische Triage                      & Automatische Triage              \\ \hline
+Definition der Bearbeitungsleistung      & Einsicht in das E-Mail Aufkommen \\ \hline
+Integrität der E-Mails und Zahlungen     & -                                \\ \hline
+Abweichungen der automatischen Triage    & Automatische Triage              \\ \hline
+Erreichbarkeit                           & -                                \\ \hline
+Koexistenz zu bisherigen Kanälen         & -                                \\ \hline
+Intuitive Nutzung                        & -                                \\ \hline
+\end{tabular}
+\label{tab:arbeitspakete}
+\end{table}
+
+\noindent Grundsätzlich wurden drei Arbeitspakete, sowie ein optionales Arbeitspaket formuliert. Das erste Paket implementiert die Einsicht in das E-Mail Aufkommen. Hierfür wird das Frontend des Prototyps um Realdaten erweitert. Um Realdaten zu erhalten, werden die notwendige Datenstruktur und das Backend aufgesetzt, welches die E-Mails des MDA abruft. Daraufhin wird das Paket zur Priorisierung von E-Mails implementiert. Dabei wird die Datenstruktur um (simulierte) Zahlungen und die Priorität erweitert, auch hier wird das Frontend des Prototyps weiter verwendet. Die automatische Triage bildet das dritte Arbeitspaket ab, bei welcher eine Erweiterung der Datenbasis um Abweichungen der Triage notwendig wird. Außerdem wird ein Service implementiert, der die eigentliche Triage übernimmt. Das vierte Arbeitspaket ist die Anbindung realer Zahlungsanbieter. Dieser Schritt wurde bewusst ausgelagert, da er die Recherche nach APIs zur Abwicklung von Zahlungen und die Erweiterung der Architektur aus den Abbildungen \ref{fig:Datenmodell} und \ref{fig:Komponentenmodell} miteinbezieht. Dadurch bringt die Anbindung der Zahlungsanbieter eine größere Komplexität mit, die den zeitlichen Rahmen dieser Arbeit übersteigt. Das Arbeitspaket wurde jedoch trotzdem definiert als Ausblick, sowie als mögliches Zusatzfeature, falls die Implementation schneller abgeschlossen wird als vermutet. Andernfalls wird Pay2Mail so vorbereitet, dass die spätere Anbindung eines Zahlungsanbieters mit möglichst wenig Aufwand umsetzbar ist. 
+
+In der Zuordnung in Tabelle \ref{tab:arbeitspakete} ist zu sehen, dass ein Großteil der Nutzeranforderungen nicht in Arbeitspakete überführt wurden. Das hängt damit zusammen, dass sie bereits implizit durch die Architektur oder technische Grundvoraussetzungen umgesetzt werden. Die technologisch unabhängige Nutzung ist durch die Implementation als Webseite gegeben. Da die Einbindung mehrerer E-Mails Clients über den zeitlichen Rahmen dieser Arbeit hinausgeht, wird lediglich das Web-Frontend implementiert, welches die einzelnen Clients individuell integrieren können. Die Sicherheit der E-Mails bleibt Aufgabe der Clients, da der Versand weiterhin über sie stattfindet. Die Sicherheit der Zahlungen hingegeben wird durch die Nutzung von HTTPS und verschlüsselten Datenbanken gewährleistet. Diese Features gehören zum Standard von Ruby on Rails und müssen daher nicht separat implementiert werden. Damit der E-Mail Prozess nicht verlangsamt wird, wird der Code in der CI/CD Pipeline auf verschiedene Fehlerquellen untersucht, die die Anwendung verlangsamen können, siehe dazu auch Kapitel \ref{Projekt_Setup_und_Einrichtung_einer_CI/CD Pipeline} und Sourcecode \ref{lst:pipeline}. Die Integrität der E-Mails und Zahlungen wird durch die Nutzung eines E-Mail Headers mit UUID sicher gestellt. Da die UUID in der Datenbank zusammen mit anderen Metadaten der E-Mail abgeglichen wird (siehe auch \ref{Datenmodell}), können Zahlungen nicht gefälscht oder wiederverwendet werden. Die Erreichbarkeit wird durch das Hosting bei DigitalOcean sichergestellt, welches bei Serverausfällen oder anderen Fehlern den Inhaber der Anwendung informiert. Die Koexistenz zu bisherigen Kanälen ist durch die Systemarchitektur impliziert, da E-Mails nicht ersetzt, sondern bei Bedarf nur erweitert werden. Die intuitive Nutzung der Anwendung ist eine Anforderungen, die sich nur unzureichend in konkrete Arbeitsschritte formulieren lässt. Stattdessen werden in der Implementation die Grundsätze der Dialoggestaltung nach ISO 9241-110 berücksichtigt, insbesondere \textit{Steuerbarkeit}, \textit{Erwartungskonformität}, \textit{Fehlertoleranz} und \textit{Selbstbeschreibungsfähigkeit} \citep{ISO9241-110}. Ob dies die intuitive Nutzung schlussendlich unterstützt, wird die Nutzerevaluation in Kapitel \ref{Nutzerevaluation_des_Systems} aufzeigen. 
+
+\section{Einsicht in das E-Mail Aufkommen}
+
+\section{Priorisierung von E-Mails}
+
+\section{Automatische Triage}
+
+\section{Anbindung von Zahlungsanbietern}
+....
