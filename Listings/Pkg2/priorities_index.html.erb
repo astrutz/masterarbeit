@@ -1,0 +1,46 @@
+<div class="row mt-4">
+  <div class="col-12">
+    <h1>E-Mail an <%= @recipient.email_address %> priorisieren</h1>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-12">
+    <p>Mit Pay2Mail haben Sie die Möglichkeit Ihre E-Mail an <%= @recipient.email_address %> gegen einen Aufpreis zu
+      priorisieren,
+      sodass sie schneller bearbeitet wird. Die Höhe richtet sich dabei nach den gezahlten Beträgen der bisher
+      eingegangenen E-Mails. Ihr voraussichtliches Bearbeitungsdatum ist unter Vorbehalt, da Sie noch überboten werden
+      können.</p>
+  </div>
+</div>
+
+<div class="row mt-4">
+  <div class="col-sm-6">
+    <table class="table table-striped table-secondary">
+      <thead>
+      <tr>
+        <th scope="col">Bearbeitung bis</th>
+        <th scope="col">Preis</th>
+      </tr>
+      </thead>
+<tbody>
+<% @messages_grouped.each_with_index do |group, i| %>
+  <% next if i < @messages_grouped.size - 1 &&
+    group.last.value_header == @messages_grouped[i + 1].last.value_header %>
+  <tr>
+    <td><%= l (group.size == @recipient.editing_performance_per_day ? i + 2 : i + 1)
+          .days.from_now.to_date %>
+    </td>
+    <td><%= group.last.value_header.present? ?
+          number_to_currency(group.last.value_header.to_f + 1) : "kostenfrei" %>
+    </td>
+  </tr>
+<% end %>
+</tbody>
+    </table>
+  </div>
+</div>
+
+<div class="col-sm-2 mt-4 pb-4">
+  <%= link_to "E-Mail priorisieren", new_sender_priority_path, class: "btn btn-primary" %>
+</div>

@@ -1,6 +1,6 @@
 % Appendix A
 
-\chapter{Tabellen, Modelle und Diagramme}
+\chapter{Tabellen, Diagramme und Befragungsergebnisse}
 \label{Tabellen_Modelle_Diagramme}
 
 \section{Stakeholderanalyse}
@@ -10,8 +10,9 @@
 	\caption[Stakeholderanalyse]{Stakeholder für E-Mails in Unternehmen}
 		\vspace{1.0em}	
     \begin{tabular}{|l|l|l|l|}
+    \rowcolor{red!25}
     \hline
-    \textbf{Bezeichnung}                   & \textbf{Beziehung} & \textbf{Objektbereich}                                             & \textbf{Priorität} \\ \hline
+    \textbf{Bezeichnung}                   & \textbf{Beziehung} & \textbf{Objektbereich}                                             & \textbf{Prio} \\ \hline
     Absender              & Anrecht            & Unlimitierter Versand von E-Mails                                  & 1                  \\ \cline{2-4} 
                                            & Interesse          & Beantwortung von E-Mails                                           & 1                  \\ \cline{2-4} 
                                            & Interesse          & Voraussichtliche Antwortzeit                                       & 1                  \\ \hline
@@ -22,10 +23,10 @@
                                            & Interesse          & Einfach erkennbare Priorität von E-Mails                           & 2                  \\ \hline
     Management            & Anspruch           & Produktivität von Mitarbeitern trotz E-Mails                       & 2                  \\ \cline{2-4} 
                                            & Anspruch           & Erreichbarkeit der Mitarbeiter                                     & 1                  \\ \hline
-    ISP                                    & Anteil             & Anteil an externer Infrastruktur zum Transport von E-Mails         & 2                  \\ \hline
-    Systemadministratoren & Anteil             & Interne Infrastruktur                                              & 1                  \\ \cline{2-4} 
+    ISP                                    & Anteil             & Anteil an externer Infrastruktur von E-Mails         & 2                  \\ \hline
+    Administratoren & Anteil             & Interne Infrastruktur                                              & 1                  \\ \cline{2-4} 
                                            & Anteil             & Schutzmaßnahmen vor Spam und Angriffen via E-Mail                  & 2                  \\ \hline
-    Betriebsräte                           & Interesse          & Interesse an psychosozialen Auswirkungen der E-Mails auf Empfänger & 3                  \\ \hline
+    Betriebsräte                           & Interesse          & Interesse an sozialen Auswirkungen auf Empfänger & 3                  \\ \hline
     \end{tabular}
 	\label{tab:stakeholderanalyse}
 \end{table}
@@ -38,8 +39,9 @@
 \centering
 	\caption[Rohdaten der Befragung]{Rohdaten der Befragung zu Bezahl- und Tokensystemen}
 \begin{tabular}{lllll}
+\rowcolor{red!25}
 \hline
-\multicolumn{1}{|l|}{\textbf{Nr.}} & \multicolumn{1}{l|}{\textbf{Geschlecht}} & \multicolumn{1}{l|}{\textbf{Alter}} & \multicolumn{1}{l|}{\textbf{Jahresnettoeinkommen}} & \multicolumn{1}{l|}{\textbf{Auswahl}} \\ \hline
+\multicolumn{1}{|l|}{\textbf{Nr.}} & \multicolumn{1}{l|}{\textbf{Geschlecht}} & \multicolumn{1}{l|}{\textbf{Alter}} & \multicolumn{1}{l|}{\textbf{Jahresbruttoeinkommen}} & \multicolumn{1}{l|}{\textbf{Auswahl}} \\ \hline
 1                                  & w                                        & 61                                  & 21.402,36 €                             & Echtgeld                              \\
 2                                  & m                                        & 53                                  & 51.985,88 €                             & Echtgeld                              \\
 3                                  & m                                        & 44                                  & 49.219,10 €                             & Keine Zahlung                         \\
@@ -151,3 +153,214 @@
 \end{figure}
 
 
+
+\newpage
+% ------------------------------------------------------
+\section{Notizen und Antworten der Nutzerevaluation}
+\label{Notizen_und_Antworten_der_Nutzerevaluation}
+
+\subsection{Absender 1}
+Alter: 36 \\
+Beruf: Chemieingenieur \\
+Geschlecht: männlich \\
+Jahresbruttoeinkommen: 59.000€
+
+\subsubsection*{Notizen während der in vivo Evaluation}
+\begin{itemize}
+    \item Verwirrt, ob die E-Mail Adresse richtig erfasst wurde, da sie bei \texttt{/capacities} nicht mehr angezeigt wird, sondern nur der Name.
+    \item Es ist nicht klar was das Minimum und Maximum an Zahlungen ist, Beschreibungstexte wären hilfreich.
+    \item E-Mail Adresse wird bei \texttt{/priority/new} nicht übernommen.
+    \item Es gibt keine Möglichkeit zurück zum Anfang zu navigieren ohne die Browser-Navigation.
+    \item Nutzung des Gegenwertheaders ist direkt verstanden worden.
+\end{itemize}
+
+\subsubsection*{Beantwortung der Fragen}
+\begin{enumerate}
+\item E-Mails werden effektiver, allerdings leidet die Effizienz, da die Priorisierung den Versandprozess erweitert und verlängert. Ist man an den Prozess gewöhnt, kann die Effizienz sich jedoch wieder verbessern.
+\item Ja, insbesondere da die Einsicht in das Aufkommen optional ist kann ich selbst entscheiden, ob ich das Aufkommen sehen will. Außerdem habe ich so eine bessere Grundlage zur Entscheidung, ob ich eine E-Mail priorisieren will.
+\setcounter{enumi}{4}
+\item Generell unterstützt das System in der Bearbeitung von E-Mails, allerdings liegt die Priorisierung ausschließlich in den Händen der Absender. Dadurch kann man sich vordrängeln, wenn man genug Geld hat, unabhängig davon wie wichtig die E-Mail wirklich ist.
+\item Das System sollte einem deutlicher aufzeigen wo man sich befindet und wie man navigieren kann. Außerdem sollte man nach der Priorisierung informiert werden, falls sich das Bearbeitungsdatum verschiebt oder man überboten wird.
+\end{enumerate}
+
+\subsection{Absender 2}
+Alter: 24 \\
+Beruf: Rechtsanwaltsfachangestellte \\
+Geschlecht: weiblich \\
+Jahresbruttoeinkommen: 21.600€
+
+\subsubsection*{Notizen während der in vivo Evaluation}
+\begin{itemize}
+    \item Unterschied zwischen Priorität und Aufkommen ist nicht ganz klar.
+    \item Das System von Priorisierung wird daraufhin auf Anhieb verstanden.
+    \item Es fehlt eine genaue Anleitung wie der Gegenwert-Header genutzt werden soll, Prinzip wurde jedoch verstanden.
+\end{itemize}
+
+\subsubsection*{Beantwortung der Fragen}
+\begin{enumerate}
+\item Ja, denn man kann je nach Dringlichkeit seine E-Mail vorne einordnen oder warten, bis man dran ist.
+\item Ja, die Transparenz ist ein großer Vorteil und sorgt dafür, dass man ein besseres Gefühl für den Empfänger bekommt.
+\setcounter{enumi}{4}
+\item Es löst das generelle Problem nicht, aber es hilft den Prozess zu optimieren.
+\item Es sollten mehr erklärende Texte hinzugefügt werden.
+\end{enumerate}
+
+\subsection{Empfänger 1}
+Alter: 21 \\
+Beruf: Student \\
+Geschlecht: männlich \\
+Jahresbruttoeinkommen: 15.464€
+
+\subsubsection*{Notizen während der in vivo Evaluation}
+\begin{itemize}
+    \item Das System und die Funktionsweise werden direkt verstanden.
+    \item Der soziale Aspekt des Systems im Generellen wird hinterfragt.
+    \item Ausnahmeregeln könnten den sozialen Aspekt lösen, aber dafür muss der Empfänger wissen, welche Personen eine E-Mail priorisieren wollten und es sich nicht leisten konnten.
+\end{itemize}
+
+\subsubsection*{Beantwortung der Fragen}
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item Ja, insbesondere da ich mit Ausnahmeregeln meine bisherigen wichtigen Absender weiter priorisieren kann.
+\item Ja, sie ergänzen die automatische Triage gut, wobei es zu wenig Felder gibt, nach denen ich filtern kann.
+\item Dadurch, dass man die Verantwortung der Priorisierung an die Absender abgibt, kann man dafür nicht in Rechenschaft gezogen werden. Das löst den Overload nicht, hilft aber bei der Bewältigung.
+\item Es sollte eine Möglichkeit geben sozial schwache Personen gezielt bei der Priorisierung zu unterstützen/zu subventionieren, damit sie im Wettbewerb und schnelle Beantwortung mithalten können.
+\end{enumerate}
+
+\subsection{Empfänger 2}
+Alter: 47 \\
+Beruf: Projektmanagerin (selbstständig) \\
+Geschlecht: weiblich \\
+Jahresbruttoeinkommen: 66.234€
+
+\subsubsection*{Notizen während der in vivo Evaluation}
+\begin{itemize}
+    \item Das System und die Funktionsweise werden direkt verstanden.
+    \item Frage: Muss der Empfänger wissen wie viel gezahlt wurde? Das könnte Druck auslösen, wenn man darüber nachdenkt als Empfänger. 
+    \item Gibt es eine Absicherung, dass keine Nachrichten ignoriert werden, die eigentlich sehr wichtig (aber ohne Zahlung versehen) sind?
+    \item Obige Frage wird nach Vorstellung der Ausnahmeregeln zurückgezogen.
+\end{itemize}
+
+\subsubsection*{Beantwortung der Fragen}
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item Ja, denn die Triage wird zumindest teilweise abgenommen. Trotzdem sehe ich mir die Betreffe der Nachrichten an, damit nichts untergeht.
+\item Ja, diese Funktion ist sehr relevant, wie bereits erwähnt. Allerdings ist kann es zu Beginn sehr zeitaufwändig sein passende Regeln zu definieren.
+\item Wenn andere meinen Overload im Vorhinein sehen und wissen auf welche Antwortzeiten sie sich einstellen müssen, wirkt das dem Stress der Bearbeitung entgegen und erzeugt unter Umständen Rücksicht bei Absendern. Sobald diese Rücksicht etabliert ist, wird auch Overload gelöst.
+\item Die Triage sollte sich nur in bestimmten Intervallen (1 bis 2 Stunden) ändern können. Ansonsten ändert sich die Reihenfolge der E-Mails mit jeder neu versendeten Mail, was dazu führt, dass man unter Umständen E-Mails bearbeitet, die ihre Priorität bereits verloren haben.
+\end{enumerate}
+
+% ------------------------------------------------------
+\newpage
+
+\section{Ordnerstruktur der Anwendung}
+\label{Ordnerstruktur_der_Anwendung}
+
+\begin{itemize}
+    \item \texttt{.github/}
+    \begin{itemize}
+        \item \texttt{workflows/}
+    \end{itemize}
+    \item \texttt{app/}
+    \begin{itemize}
+        \item \texttt{assets/}
+        \item \texttt{channels/}
+        \item \texttt{controllers/}
+        \item \texttt{helpers/}
+        \item \texttt{javascript/}
+        \item \texttt{jobs/}
+        \item \texttt{mailers/}
+        \item \texttt{models/}
+        \item \texttt{services/}
+        \item \texttt{views/}
+    \end{itemize}
+    \item \texttt{bin/}
+    \item \texttt{config/}
+    \begin{itemize}
+        \item \texttt{environments/}
+        \item \texttt{initializers/}
+        \item \texttt{locales/}
+    \end{itemize}
+    \item \texttt{db/}
+    \begin{itemize}
+        \item \texttt{migrate/}
+    \end{itemize}
+    \item \texttt{lib/}
+    \begin{itemize}
+        \item \texttt{assets/}
+        \item \texttt{tasks/}
+    \end{itemize}
+    \item \texttt{public/}
+    \item \texttt{storage/}
+    \item \texttt{test/}
+    \begin{itemize}
+        \item \texttt{channels/}
+        \item \texttt{controllers/}
+        \item \texttt{fixtures/}
+        \item \texttt{helpers/}
+        \item \texttt{jobs/}
+        \item \texttt{mailers/}
+        \item \texttt{models/}
+        \item \texttt{system/}
+    \end{itemize}
+    \item \texttt{vendor/}
+    \begin{itemize}
+        \item \texttt{javascript/}
+    \end{itemize}
+\end{itemize}
+
+% ------------------------------------------------------
+\newpage
+
+\section{Routenstruktur der Anwendung}
+\label{Routenstruktur_der_Anwendung}
+
+\begin{itemize}
+    \item \texttt{overview}: Startseite
+    \item \texttt{sender}
+    \begin{itemize}
+        \item \texttt{overview}
+        \begin{itemize}
+            \item \texttt{index}: Landingpage Absender
+        \end{itemize}
+        \item \texttt{capacities}
+        \begin{itemize}
+            \item \texttt{index}: Auflistung des aktuellen Aufkommens
+        \end{itemize}
+        \item \texttt{priorities}
+        \begin{itemize}
+            \item \texttt{index}: Auflistung der bisher priorisierten E-Mails
+            \item \texttt{new}: Formular zum Priorisieren einer E-Mail
+            \item \texttt{show}: Anzeigen der UUID nach Priorisieren einer E-Mail
+        \end{itemize}
+    \end{itemize}
+    \item \texttt{recipient}
+    \begin{itemize}
+        \item \texttt{sessions}
+         \begin{itemize}
+            \item \texttt{new}: Einloggen
+            \item \texttt{destroy}: Ausloggen
+        \end{itemize}
+        \item \texttt{recipients}
+        \begin{itemize}
+            \item \texttt{new}: Formular zum Erstellen eines neuen Accounts  
+            \item \texttt{edit}: Anpassen der Regeln und Bearbeitungsleistung
+        \end{itemize}
+        \item \texttt{rules}
+        \begin{itemize}
+            \item \texttt{index}: Auflistung aller Regeln
+            \item \texttt{new}: Formular zum Erstellen einer neuen Regel
+            \item \texttt{edit}: Formular zum Ändern einer Regeln
+            \item \texttt{destroy}: Löschen einer Regel 
+        \end{itemize}
+        \item \texttt{inbox}
+        \begin{itemize}
+            \item \texttt{inbox}: Anzeige der E-Mails innerhalb der Triage
+        \end{itemize}
+        \item \texttt{messages}
+        \begin{itemize}
+            \item \texttt{show}: Anzeige einer einzelnen E-Mail  
+            \item \texttt{destroy}: Erledigen einer E-Mail
+        \end{itemize}
+    \end{itemize}
+\end{itemize}

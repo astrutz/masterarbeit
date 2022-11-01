@@ -12,29 +12,29 @@ Durch den prototypischen Fokus kann ein Großteil der in Abbildung \ref{fig:Komp
 \section{Projekt Setup und Einrichtung einer CI/CD Pipeline}
 \label{Projekt_Setup_und_Einrichtung_einer_CI/CD Pipeline}
 
-Zur Erstellung eines neuen Rails-Projektes bietet Ruby on Rails den Befehl \texttt{rails new pay2mail}, wobei pay2mail der Name des Projektes ist. Daraufhin wird eine Ordnerstruktur erstellt, die von Rails vorgegeben ist. Die Ordnerstruktur ist in Anhang xyz dargestellt. Für den Prototypen ist insbesondere der Ordner \texttt{app/} interessant, da er sowohl die Controller, als auch Views und Assets, wie css-Dateien enthält. Startet man den Server mit dem Befehl \texttt{rails server}, ist er im Standard unter Port 3000 verfügbar.
+Zur Erstellung eines neuen Rails-Projektes bietet Ruby on Rails den Befehl \texttt{rails new pay2mail}, wobei pay2mail der Name des Projektes ist. Daraufhin wird eine Ordnerstruktur erstellt, die von Rails vorgegeben ist. Die Ordnerstruktur ist in Anhang \ref{Ordnerstruktur_der_Anwendung} dargestellt. Für den Prototypen ist insbesondere der Ordner \texttt{app/} interessant, da er sowohl die Controller, als auch Views und Assets, wie css-Dateien enthält. Startet man den Server mit dem Befehl \texttt{rails server}, ist er im Standard unter Port 3000 verfügbar.
 
 Bevor die eigentliche Entwicklung des Prototypen beginnt, wird eine CI/CD Pipeline eingerichtet. Sie dient dazu mit jedem \texttt{git push} auf den master-Branch verschiedene Routinen zu durchlaufen, die die Lauffähigkeit und Qualität des Codes prüfen. So wird auch die Stabilität der Anwendung sicher gestellt. Da das Projekt bei GitHub versioniert wird, wird GitHub Actions verwendet. GitHub Actions ist eine CI/CD-Umgebung, die direkt in GitHub integriert ist \citep{GitHub2022}. Pipelines, hier auch Workflows genannt, können als .yml-Datei formuliert werden. Der vollständige Workflow für Pay2Mail ist in Anhang \ref{lst:pipeline} zu sehen.
 
 \begin{listing}[!ht]
-\inputminted[firstline=8, lastline=32, linenos]{yaml}{Listings/rubyonrails.yml}
+\inputminted[firstline=8, lastline=18, linenos]{yaml}{Listings/Prototype/rubyonrails.yml}
 
 \caption
-    [Auszug: CI Pipeline mit Testing-Job (\texttt{rubyonrails.yml})]
+    [Auszug: CI Pipeline mit Testing-Job]
     {Auszug: CI Pipeline mit Testing-Job (\texttt{.github/rubyonrails.yml})}
 
 \label{lst:pipeline-testing}
 \end{listing}
 
-Zu Beginn wird definiert, dass die Pipeline bei jedem Push auf Master, sowie bei jedem Pull Request, der in Master gemergt werden soll, läuft. Daraufhin werden zwei Jobs definiert, die zwei voneinander unabhängige Abläufe beschreiben und parallel laufen. Der erste Job \texttt{test} läuft auf einer Ubuntu VM und führt mit einer eigens dafür aufgesetzten Datenbank Unittests, Integrationtests und Systemtests aus. Dazu wird nach der Definition von Datenbank und Betriebssystem die aktuelle Codebasis geladen, die Abhängigkeiten von Ruby und Rails werden installiert und das Datenbankschema wird intialisiert. Nach diesen Vorbereitungen werden die Tests selbst mit \texttt{bin/rake} ausgeführt. Rake ist ein in Rails integrierter Test Runner, die alle im Ordner \texttt{test/} abgelegten Tests ausführt. Während der Implementation der Anwendung werden Unit Tests und Integration Tests geschrieben, die Kernfunktionalitäten des Systems abdecken sollen. Die Pipeline zum Ausführen der Tests ist in Sourcecode \ref{lst:pipeline-testing} zu sehen.
+Zu Beginn wird definiert, dass die Pipeline bei jedem Push auf Master, sowie bei jedem Pull Request, der in Master gemergt werden soll, läuft. Daraufhin werden zwei Jobs definiert, die zwei voneinander unabhängige Abläufe beschreiben und parallel laufen. Der erste Job \texttt{test} läuft auf einer Ubuntu VM und führt mit einer eigens dafür aufgesetzten Datenbank Unittests, Integrationtests und Systemtests aus. Dazu wird nach der Definition von Datenbank und Betriebssystem die aktuelle Codebasis geladen, die Abhängigkeiten von Ruby und Rails werden installiert und das Datenbankschema wird initialisiert. Nach diesen Vorbereitungen werden die Tests selbst mit \texttt{bin/rake} ausgeführt. Rake ist ein in Rails integrierter Test Runner, die alle im Ordner \texttt{test/} abgelegten Tests ausführt. Während der Implementation der Anwendung werden Unit Tests und Integration Tests geschrieben, die Kernfunktionalitäten des Systems abdecken sollen. Die Pipeline zum Ausführen der Tests ist in Sourcecode \ref{lst:pipeline-testing} zu sehen.
 
-Da sie zur Sicherung der Codequalität dienen, jedoch keinen direkten Einfluss auf die Anwendung, sowie die Nutzung haben, werden die Tests in dieser Arbeit nicht weiter thematisiert. Die Tests können jedoch im Ordner \texttt{test/controllers/} eingesehen werden.
+Da sie zur Sicherung der Codequalität dienen, jedoch keinen direkten Einfluss auf die Anwendung, sowie die Nutzung haben, werden die Tests in dieser Arbeit nicht weiter thematisiert. Die Tests können jedoch im Ordner \texttt{test/} eingesehen werden.
 
 \begin{listing}[!ht]
-\inputminted[firstline=34, lastline=48, linenos]{yaml}{Listings/rubyonrails.yml}
+\inputminted[firstline=19, lastline=31, linenos]{yaml}{Listings/Prototype/rubyonrails.yml}
 
 \caption
-    [Auszug: CI Pipeline mit Linting-Job (\texttt{rubyonrails.yml})]
+    [Auszug: CI Pipeline mit Linting-Job]
     {Auszug: CI Pipeline mit Linting-Job (\texttt{.github/rubyonrails.yml})}
     
 \label{lst:pipeline-linting}
@@ -43,7 +43,7 @@ Da sie zur Sicherung der Codequalität dienen, jedoch keinen direkten Einfluss a
 
 Außerhalb der Tests wird ein weiterer Job namens \texttt{lint} ausgeführt. Dieser läuft ebenfalls auf Ubuntu und führt verschiedene Befehle aus, die die Qualität des Codes prüfen. Auch hier wird zu Beginn die Codebasis geladen und die nötigen Dependencies werden installiert. Daraufhin wird \texttt{bundle audit --update} ausgeführt. Dieses Plugin prüft die Abhängigkeiten im \texttt{Gemfile} auf Sicherheitslücken, potenziell gefährliche Quellen und führt automatisch Updates auf Patch-Ebene aus. Mit \texttt{brakeman -q -w2} wird der Quellcode selbst auf Sicherheitslücken geprüft. Das Flag \texttt{-q} sorgt dafür, dass Logs so begrenzt werden, dass nur Probleme, aber keine allgemeinen Informationen geloggt werden; das Flag \texttt{-w2} definiert, dass sowohl Warnungen mit mittlerer als auch mit hoher Priorität ausgegeben werden sollen. Zuletzt wird \texttt{rubocop --parallel} ausgeführt. Rubocop ist ein Linter, also ein Tool zur statischen Analyse und Formatierung des Sourcecodes \citep{Batsov2022}. Die Pipeline zum Linting ist in Sourcecode \ref{lst:pipeline-testing} zu sehen.
 
-Die Pipeline selbst enthält keine Informationen zum Deployment. Stattdessen wird dazu \textit{App Platform} von \textit{DigitalOcean} verwendet. App Platform bietet die Möglichkeit Sourcecode direkt als Web Anwendungen zu deployen, dabei wird Autodeploy verwendet, mit welchem der Server selbst erkennt in welcher Sprache eine Anwendung geschrieben ist und notwendige Befehle zum Deployment selbstständig ausführt \citep{DigitalOcean2022}. Um den Sourcecode der App zu definieren, wird das Repository samt Branch ausgewählt. Daraufhin lädt App Platform den Sourcecode selbstständig bei jedem Push und deployt die Anwendung, die unter einer bereits definierten URL, in diesem Fall \url{https://plankton-app-whbh9.ondigitalocean.app}, erreichbar ist. Der Vorteil von App Platform ist die einfache Konfiguration, wodurch das Hosting zu Beginn der Entwicklung von prototypischen Anwendungen vernachlässigt werden kann.
+Die Pipeline selbst enthält keine Informationen zum Deployment. Stattdessen wird dazu \textit{App Platform} von \textit{DigitalOcean} verwendet. App Platform bietet die Möglichkeit Sourcecode direkt als Web Anwendungen zu deployen, dabei wird \textit{Autodeploy} verwendet, mit welchem der Server selbst erkennt in welcher Sprache eine Anwendung geschrieben ist und notwendige Befehle zum Deployment selbstständig ausführt \citep{DigitalOcean2022}. Um den Sourcecode der App zu definieren, wird das Repository samt Branch ausgewählt. Daraufhin lädt App Platform den Sourcecode selbstständig bei jedem Push und deployt die Anwendung, die unter einer bereits definierten URL, in diesem Fall \url{https://plankton-app-whbh9.ondigitalocean.app}, erreichbar ist. Der Vorteil von App Platform ist die einfache Konfiguration, wodurch das Hosting zu Beginn der Entwicklung von prototypischen Anwendungen vernachlässigt werden kann.
 
 Um eine aussagekräftigere und einprägsamere URL zu nutzen, die sich Nutzer und Tester merken können, wurde die Domain \url{pay2mail.org} erworben. Die Weiterleitung auf die App Platform Anwendung geschieht durch den DNS-Eintrag \texttt{pay2mail.org. CNAME plankton-app-whbh9.ondigitalocean.app.} Ferner wurde ein SSL-Zertifikat erworben, um die Sicherheit der Nutzerdaten, insbesondere im späteren Zahlungsprozess, sicherzustellen.
 
@@ -55,11 +55,11 @@ Wie bereits zuvor erwähnt, wird das Backend des Absenders lediglich mit Beispie
 Zusätzlich wird eine Route unter \texttt{/send/} im \texttt{overview\_controller.rb} implementiert, die als Startseite für Absender fungiert und im späteren Verlauf von E-Mail Clients abgerufen werden kann. Damit der Nutzer die E-Mail Adresse des Empfängers nicht erneut eingeben muss, wenn sie bereits im E-Mail Client hinterlegt ist, kann die Route mit dem Query-Parameter \texttt{recipient} aufgerufen werden. Durch DRY und Code Over Convention kann der Controller minimal gehalten werden, wie in Sourcecode \ref{lst:overview_controller} zu sehen.
 
 \begin{listing}[!ht]
-\inputminted[linenos]{ruby}{Listings/overview_controller.rb}
+\inputminted[linenos]{ruby}{Listings/Prototype/overview_controller.rb}
 
 \caption
-    [Controller für Absender-Frontpage (\texttt{overview\_controller.rb})]
-    {Controller für Absender-Frontpage (\texttt{app/controllers/sender/overview\_controller.rb})}
+    [Controller für Absender-Landingpage]
+    {Controller für Absender-Landingpage (\texttt{app/controllers/sender/overview\_controller.rb})}
     
 \label{lst:overview_controller}
 \end{listing}
@@ -67,10 +67,10 @@ Zusätzlich wird eine Route unter \texttt{/send/} im \texttt{overview\_controlle
 \noindent Die Route \texttt{/capacity} zum Anzeigen des Aufkommens muss verpflichtend mit dem Query-Parameter \texttt{recipient} aufgerufen werden. In der späteren Anwendung werden die Bearbeitungsleistung, sowie die offenen Mails aus der Datenbank geladen. Für den Prototyp werden, wie in Sourcecode \ref{lst:capacities_controller} zu sehen, Standardwerte formuliert. So hat der Empfänger 107 E-Mails und eine Bearbeitungsleistung von 9 E-Mails pro Tag. Zusätzlich lassen sich auch diese Werte mit Query-Parametern festlegen. Dies ist notwendig, um Unit Tests formulieren zu können. Bei der Route \texttt{/priority} wird darauf verzichtet die Bearbeitungsleistung, sowie die offenen E-Mails im Backend zu definieren. Dazu müsste eine Liste von E-Mails mit spezifischen Zahlungen erzeugt werden, aus welcher die notwendigen Zahlungen für eine Priorisierung errechenbar wären. Diese Implementation würde bereits auf Model-Ebene notwendig sein und übertrifft den Rahmen des Prototyps. Stattdessen werden Testdaten im Frontend definiert.  
 
 \begin{listing}[!ht]
-\inputminted[linenos]{ruby}{Listings/capacities_controller.rb}
+\inputminted[linenos]{ruby}{Listings/Prototype/capacities_controller.rb}
 
 \caption
-    [Controller für Empfänger-Aufkommen (\texttt{capacities\_controller.rb})]
+    [Controller für Empfänger-Aufkommen]
     {Controller für Empfänger-Aufkommen (\texttt{app/controllers/sender/capacities\_controller.rb})}
 
 \label{lst:capacities_controller}
@@ -86,10 +86,10 @@ Das Frontend zur Startseite des Absenders besteht lediglich aus einem Eingabefel
 Das Aufkommen des Empfängers wird in drei umrahmten Elementen, von Bootstrap \textit{Card} genannt, umgesetzt. Die erste Card zeigt die Anzahl der offenen E-Mails des Empfängers, die zweite Card zeigt die Bearbeitungsleistung. Die dritte Card zeigt an, wann eine E-Mail ohne Priorisierung bearbeitet werden würde, wenn man sie jetzt abschickt. Das Markup dieser Card ist in Sourcecode \ref{lst:capacities/index} zu sehen. In Zeile 51 wird die Anzahl der E-Mails durch die Bearbeitungsleistung dividiert, um zu wissen wie viele Tage der Empfänger noch mit der Bearbeitung beschäftigt ist. Daraufhin wird ein Tag addiert für den Fall, dass die Bearbeitung für diesen Tag bereits abgeschlossen ist. Die Zahl wird aufgerundet und mit dem aktuellen Datum addiert, um ein potenzielles Bearbeitungsdatum zu erhalten. Der Aufruf \texttt{l} zu Beginn lokalisiert das Datum und zeigt es im Format TT.MM.JJJ an. Zusätzlich wird nach den Cards ein Informationstext über Priorisierung mit einem Link auf \texttt{/priority} angezeigt.
 
 \begin{listing}[!ht]
-\inputminted[firstline=43, lastline=55, linenos]{erb}{Listings/capacities_index.html.erb}
+\inputminted[firstline=43, lastline=55, linenos]{erb}{Listings/Prototype/capacities_index.html.erb}
 
 \caption
-    [Auszug: View für Empfänger-Aufkommen (\texttt{capacities/index.html.erb})]
+    [Auszug: View für Empfänger-Aufkommen]
     {Auszug: View für Empfänger-Aufkommen (\texttt{app/views/sender/capacities/index.html.erb})}
 
 \label{lst:capacities/index}
