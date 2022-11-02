@@ -167,15 +167,24 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 %	ACRONYMS + GLOSSARY
 %----------------------------------------------------------------------------------------
+\newglossarystyle{modlist}{%
+  \setglossarystyle{list}%
+  \renewcommand{\glsgroupskip}{}
+}
 
-\setglossarystyle{list}
+\newglossarystyle{modaltlist}{%
+  \setglossarystyle{altlist}%
+  \renewcommand{\glsgroupskip}{}
+}
+
+\setglossarystyle{modlist}
 \printglossary[type=\acronymtype, title=Abkürzungsverzeichnis, toctitle=Abkürzungsverzeichnis, nonumberlist]
 \addcontentsline{toc}{chapter}{Abkürzungsverzeichnis} % Adds line into table of contents
 
 \glsaddallunused[\acronymtype]
 
 
-\setglossarystyle{altlist}
+\setglossarystyle{modaltlist}
 \printglossary[nonumberlist]
 \addcontentsline{toc}{chapter}{Glossar} % Adds line into table of contents
 
@@ -209,7 +218,9 @@ headsepline, % Uncomment to get a line under the header
 %----------------------------------------------------------------------------------------
 %	THESIS CONTENT - APPENDICES
 %----------------------------------------------------------------------------------------
-
+\clearpage
+\pagenumbering{roman}
+\setcounter{page}{21}
 \appendix % Cue to tell LaTeX that the following "chapters" are Appendices
 
 % Include the appendices of the thesis as separate files from the Appendices folder
